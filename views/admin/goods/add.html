@@ -1,0 +1,82 @@
+{{template "../public/page_header.html"}}
+<!-- 加载富文本编辑器 -->
+<link href="/static/admin/wysiwyg-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/admin/wysiwyg-editor/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="/static/admin/wysiwyg-editor/js/zh_cn.js"></script>
+
+<!-- 批量上传图片 -->
+<link rel="stylesheet" type="text/css" href="/static/admin/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="/static/admin/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/static/admin/diyUpload/js/diyUpload.js"></script>
+
+
+
+<div class="container-fluid">
+    <div class="row">       
+        <div class="panel panel-default">              
+            <div class="panel-heading">
+              增加商品
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive input-form goods_content">
+                    <form action="/{{config "String" "adminPath" ""}}/goods/doAdd" method="post" enctype="multipart/form-data">
+                             
+                         <!-- Nav tabs -->
+                         <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#general"  role="tab" data-toggle="tab">通用信息</a></li>
+                            <li role="presentation"><a href="#detail" role="tab" data-toggle="tab">详细描述</a></li>
+                            <li role="presentation"><a href="#photo"  role="tab" data-toggle="tab">商品相册</a></li>              
+                        </ul>         
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="general">        
+        
+                                <ul       class="form_input">
+                                              <li> <span> 商品名称:</span> <input type="text" name="title" class="input"/></li>
+                                              <li> <span> 商品图片:</span> <input type="file" name="goods_img"/></li>
+                                              <li>  <span>商品价格:</span> <input type="text" name="price"/>元/斤</li>
+                                              <li>  <span>商品原价:</span>  <input type="text" name="market_price"/>元/斤</li>
+                  
+                                              <li> <span>商品状态:</span>　<input type="radio" value="1" name="status" checked/> 显示                                    　
+                                                  <input type="radio" value="0" name="status"/>  隐藏
+                                               </li>
+                           
+                                               <li> <span>加入推荐:</span><input type="checkbox" value="1" name="is_best"/> 精品
+                                                   <input type="checkbox" value="1" name="is_hot"/> 热销
+                                                   <input type="checkbox" value="1" name="is_new"/> 新品
+                                               </li>
+                                     </ul>
+      
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="detail">
+      
+                                  <textarea name="goods_content" id="content" cols="100" rows="8"></textarea>
+
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="photo">
+      
+                                 <div id="photoUploader" ></div>
+                                 <div class="photoList" id="photoList">
+                                </div>
+                              </div>
+
+
+                        </div>
+
+                            <button type="submit" class="btn btn-success goods_content_btn">提交</button>
+                            
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- 其他js代码已经迁移到了static/admin/js/base.js里面了    -->
+<script type="text/javascript" src="/static/admin/js/goods.js"></script>
+</body>
+</html>

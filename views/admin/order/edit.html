@@ -1,0 +1,49 @@
+{{template "../public/page_header.html" .}}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                编辑用户订单
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive input-form">
+                    <form action="/{{config "String" "adminPath" ""}}/order/doEdit" method="post">
+                        <ul>
+                            <input type="hidden" name="order_id"  value="{{.order.OrderId}}">
+                            <li> 订单号: <input readonly type="text" name="order_id" value="{{.order.OrderId}}" /></li>
+                            <li> 收货人名字: <input type="text" name="name" value="{{.order.Name}}" /></li>
+                            <li> 总价: <input type="text" name="allPrice"  value="{{.order.AllPrice}}" /></li>
+                            <li> 地址: <input type="text" name="address"  value="{{.order.Address}}" /></li>
+                            <li>支付状态:
+                                <select name="pay_status" id="pay_status">
+                                    {{$paymentStatus := .order.PayStatus}}
+                                    <option value="0" {{if eq $paymentStatus 0}}selected{{end}}>未支付</option>
+                                    <option value="1" {{if eq $paymentStatus 1}}selected{{end}}>已支付</option>
+                                </select>
+                            </li>
+                            <li> 订单状态:
+                                <select name="order_status" id="order_status">
+                                    {{$orderStatus := .order.OrderStatus}}
+                                    <option value="0" {{if eq $orderStatus 0}}selected{{end}}>已下单</option>
+                                    <option value="1" {{if eq $orderStatus 1}}selected{{end}}>已付款</option>
+                                    <option value="2" {{if eq $orderStatus 2}}selected{{end}}>已配货</option>
+                                    <option value="3" {{if eq $orderStatus 3}}selected{{end}}>发货</option>
+                                    <option value="4" {{if eq $orderStatus 4}}selected{{end}}>交易成功</option>
+                                    <option value="5" {{if eq $orderStatus 5}}selected{{end}}>退货</option>
+                                    <option value="6" {{if eq $orderStatus 6}}selected{{end}}>取消</option>
+                                </select>
+                            </li>
+                            <li>
+                                <br/>
+                                <button type="submit" class="btn btn-default">提交</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

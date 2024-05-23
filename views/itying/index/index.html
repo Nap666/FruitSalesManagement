@@ -1,0 +1,131 @@
+{{template "../public/page_header.html" .}}
+
+
+<!-- start banner_x -->
+<div class="banner_x center">
+	<a href="./index.html" target="_blank"><div class="logo fl"></div></a>
+	<a href=""><div class="ad_top fl"></div></a>
+	<div class="nav fl">
+		<ul class="clearfix" id="nav_list">
+			{{range $key,$value := .middleNavList}}
+			<li>
+				<a href="#" target="_blank">{{$value.Title}}</a>
+			
+				<ol class="children-list clearfix">
+					{{range $k,$v := $value.GoodsItem}}
+						<li>
+							<a href="#">
+								<img src="{{$v.GoodsImg | formatImg}}" alt="{{$v.Title}}" />
+								<p>{{$v.Price}}元</p>
+							</a>
+						</li>
+					{{end}}									
+				</ol>
+			
+			</li>
+			{{end}}
+		</ul>
+	</div>
+
+{{/*	主界面模糊查询--实现*/}}
+	<div class="search fr">
+		<form  action="/search" method="get">
+			<div class="text fl">
+				<input type="text" class="shuru" value="{{.keyword}}" id="keyword" name = "keyword" placeholder="请输入商品名称">
+			</div>
+			<div class="submit fl">
+				<input type="submit" class="sousuo" value="搜索"/>
+			</div>
+			<div class="clear"></div>
+		</form>
+		<div class="clear"></div>
+	</div>
+</div>
+<!-- end banner_x -->
+
+<!-- start banner_y -->
+<div class="banner_y center">
+	<div class="nav">
+		<ul>
+			{{range $key,$value := .goodsCateList}}
+			<li>
+				{{if eq $value.Link ""}}
+					<a href="category_{{$value.Id}}.html" target="_blank">{{$value.Title}}</a>	
+				{{else}}
+					<a href="{{$value.Link}}" target="_blank">{{$value.Title}}</a>
+				{{end}}
+				
+				<div class="pop">
+					<ol class="cate_list clear">
+								
+						{{range $k,$v := $value.GoodsCateItem}}
+							<li>
+								<div class="xuangou_left">
+
+									{{if eq $v.Link ""}}
+
+										<a href="category_{{$v.Id}}.html" target="_blank" class="clearfix">
+											<div class="img fl"><img src="{{$v.CateImg | formatImg}}" alt="{{$v.Title}}"></div>
+											<span class="fl">{{$v.Title}}</span>									
+										</a>
+									{{else}}
+										<a href="{{$v.Link}}" target="_blank" class="clearfix">
+											<div class="img fl"><img src="{{$v.CateImg | formatImg}}" alt="{{$v.Title}}"></div>
+											<span class="fl">{{$v.Title}}</span>									
+										</a>
+									{{end}}
+
+								</div>
+								
+							</li>
+						{{end}}						
+					</ol>
+				</div>
+			
+			</li>
+			{{end}}
+
+		</ul>
+	</div>
+
+
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+
+			{{range $key,$value := .focusList}}
+				<div class="swiper-slide">
+					<a href="{{$value.Link}}" target="_blank">
+						<img src="{{$value.FocusImg | formatImg}}" alt="{{$value.Title}}" />
+					</a>
+				</div>
+			{{end}}
+		</div>
+		<!-- Add Arrows -->
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+	</div>
+</div>
+
+
+<div class="category_item w">
+	<div class="title center">果蔬</div>
+	<div class="main center">
+		<div class="">
+			{{range $key,$value := .goods}}
+				{{if ne $value.Status 0}}
+					<div class="hot fl">
+	{{/*					<div class="xinpin"><span style="background:#fff"></span></div>*/}}
+						<div class="tu"><a href="item_{{$value.Id}}.html"><img src="{{$value.GoodsImg | formatImg}}"></a></div>
+						<div class="miaoshu"><a href="item_{{$value.Id}}.html">{{$value.Title}}</a></div>
+						<div class="jiage">{{$value.Price}}元/斤</div>
+					</div>
+				{{end}}
+			{{end}}
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+</html>

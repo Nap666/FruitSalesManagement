@@ -1,0 +1,41 @@
+{{template "../public/page_header.html"}}
+
+
+<div class="panel panel-default">
+    <!--
+    列表展示
+    -->
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="th">
+                    <th>图标类型</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                    <tr>
+                        <td class="text-center">
+                            <a href="/{{config "String" "adminPath" ""}}/dataShow/bar" />柱状图</a> <br/>　 　
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <a href="/{{config "String" "adminPath" ""}}/dataShow/pie" />饼状图</a> <br/>　 　
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div id="pagination" class="pagination fr">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

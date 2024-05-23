@@ -1,0 +1,142 @@
+{{template "../public/page_header.html"}}
+<!-- 加载富文本编辑器 -->
+<link href="/static/admin/wysiwyg-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/static/admin/wysiwyg-editor/js/froala_editor.pkgd.min.js"></script>
+<script type="text/javascript" src="/static/admin/wysiwyg-editor/js/zh_cn.js"></script>
+
+<!-- 批量上传图片 -->
+<link rel="stylesheet" type="text/css" href="/static/admin/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="/static/admin/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="/static/admin/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="/static/admin/diyUpload/js/diyUpload.js"></script>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                修改商品
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive input-form goods_content">
+                    <form action="/{{config "String" "adminPath" ""}}/goods/doEdit" method="post"
+                        enctype="multipart/form-data">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#general" role="tab"
+                                    data-toggle="tab">通用信息</a></li>
+                            <li role="presentation" ><a href="#detail" role="tab" data-toggle="tab">详细描述</a></li>
+                            <li role="presentation"><a href="#photo" role="tab" data-toggle="tab">商品相册</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="general">
+
+                                <input type="hidden" name="id" value="{{.goods.Id}}">
+                                <input type="hidden" name="prevPage" value="{{.prevPage}}">
+                                
+                                <ul class="form_input">
+                                    <li> <span> 商品标题:</span> <input type="text" name="title" class="input"
+                                            value="{{.goods.Title}}" /></li>
+                                    <li> <span>所属分类:</span>
+
+                                        <select name="cate_id" id="cate_id">
+                                            {{$cateId := .goods.CateId}}
+                                            {{range $key,$value := .goodsCateList}}
+                                                 <option  {{if eq $cateId $value.Id}}selected{{end}} value="{{$value.Id}}">{{$value.Title}}</option>
+                                                    {{range $k,$v := $value.GoodsCateItem}}
+                                                     <option {{if eq $cateId $v.Id}}selected{{end}}  value="{{$v.Id}}">　-{{$v.Title}}</option>
+                                                    {{end}}
+                                            {{end}}
+                                        </select>
+                                    </li>
+                                    <li> <span> 商品图片:</span> <input type="file" name="goods_img" /></li>
+                                  
+                                    {{if ne .goods.GoodsImg ""}}
+                                     <img src="{{.goods.GoodsImg | formatImg}}" width="80"/>
+                                    {{end}}    
+                                  
+                                
+
+                                    <li> <span>商品价格:</span> <input type="text" name="price" value="{{.goods.Price}}"/></li>
+                                    <li> <span>商品原价:</span> <input type="text" name="market_price"  value="{{.goods.MarketPrice}}" /></li>
+                                    <li> <span>商品库存:</span> <input type="text" name="goods_number" value="{{.goods.GoodsNumber}}" /></li>
+{{/*                                    <li> <span>商品排序:</span> <input type="text" name="sort" value="{{.goods.Sort}}"/></li>*/}}
+
+
+                                    <li> <span>商品状态:</span>　
+                                        
+                                        <input type="radio" value="1" name="status" {{if eq .goods.Status 1}}checked{{end}} id="status_1"  /> <label for="status_1">显示</label>
+                                        <input type="radio" value="0" name="status" {{if eq .goods.Status 0}}checked{{end}}  id="status_2"  />  <label for="status_2">隐藏</label>
+                                    </li>
+
+                                    <li> <span>加入推荐:</span>　
+                                        
+                                        <input type="checkbox" value="1" name="is_best" {{if eq .goods.IsBest 1}}checked{{end}}/> 精品
+                                        <input type="checkbox" value="1" name="is_hot" {{if eq .goods.IsHot 1}}checked{{end}} /> 热销
+                                        <input type="checkbox" value="1" name="is_new" {{if eq .goods.IsNew 1}}checked{{end}}/> 新品
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="detail">
+
+                                <textarea name="goods_content" id="content" cols="100" rows="8">{{.goods.GoodsContent}}</textarea>
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="photo">
+
+                               
+                                <div class="photoList" id="photoList">
+                                    <ul id="goods_image_list" class="goods_image_list clear">
+
+                                        {{$goodsColor := .goodsColor}}                                    
+                                        {{range $key,$value := .goodsImage}}
+                                        <li>                                                                                      
+                                       
+                                            <img  src="{{$value.ImgUrl | formatImg}}" class="pic" />
+                                            <div class="color_list">
+
+{{/*                                                <select class="relation_goods_color" goods_image_id="{{$value.Id}}">*/}}
+{{/*                                                    <option value="0">关联颜色</option>*/}}
+{{/*                                                    {{range $k,$v := $goodsColor}}*/}}
+{{/*                                                        {{if eq $v.Checked true}}                                                                    */}}
+{{/*                                                            <option value="{{$v.Id}}" {{if eq $value.ColorId $v.Id}}selected{{end}}>{{$v.ColorName}}</option>*/}}
+{{/*                                                        {{end}}*/}}
+{{/*                                                    {{end}}*/}}
+{{/*                                                </select>                                                        */}}
+                                            </div>
+
+                                            <div class="goods_image_delete" goods_image_id="{{$value.Id}}"></div>
+                                        </li>
+                                        {{end}}
+                                    </ul>
+                                </div>
+
+
+                                <div id="photoUploader"></div>
+                            </div>
+
+
+                        </div>
+
+                        <button type="submit" class="btn btn-success goods_content_btn">提交</button>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- js代码已经迁移到了static/admin/js/goods.js里面了   -->
+<script type="text/javascript" src="/static/admin/js/goods.js"></script>
+</body>
+
+</html>

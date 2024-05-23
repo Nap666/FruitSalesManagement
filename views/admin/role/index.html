@@ -1,0 +1,41 @@
+{{template "../public/page_header.html" .}}
+<div class="container-fluid">
+    <div class="row">
+     
+      
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="th">
+                        <th>角色名称</th>
+                        <th>角色描述</th>
+                        <th>增加时间</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{range $key,$value := .roleList}}
+                    <tr>
+                        <td>{{$value.Title}}</td>
+                        <td>{{$value.Description}}</td>
+                        <td>{{$value.AddTime | unixToDate}}</td>           
+                        <td class="text-center">
+                            <a href="/{{config "String" "adminPath" ""}}/role/auth?id={{$value.Id}}">授权</a>　
+
+                            <a href="/{{config "String" "adminPath" ""}}/role/edit?id={{$value.Id}}">编辑</a>　
+
+                            <a class="delete" href="/{{config "String" "adminPath" ""}}/role/delete?id={{$value.Id}}">删除</a>
+
+
+                        </td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

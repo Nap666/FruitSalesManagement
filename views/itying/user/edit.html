@@ -1,0 +1,88 @@
+{{template "../public/page_header.html" .}}
+{{template "../public/banner.html" .}}
+<!-- end banner_x -->
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        /*background-color: #f4f4f4;*/
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: left;
+        margin-top: 50px;
+        color: rgba(51, 51, 51, 0.26);
+    }
+    form {
+        max-width: 400px;
+        /*margin: 0 auto;*/
+        /*padding-left: 50px;*/
+        /*background-color: #fff;*/
+        /*border-radius: 5px;*/
+        /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #ff8800;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<!-- self_info -->
+<div class="grzxbj">
+    <div class="selfinfo center">
+        <div class="lfnav fl">
+            <div class="ddzx">用户中心</div>
+            <div class="subddzx">
+                {{template "../public/user_left.html" .}}
+            </div>
+
+        </div>
+        <div class="rtcont fr">
+            <h1>修改资料</h1>
+            <div class="uc-content-box">
+                <form action="/user/doedit" method="post" >
+                    <label for="phone" class="search-btn">新手机号码：</label>
+                    <input type="text" id="phone1" name="phone1"  required><br><br>
+                    <label for="phone" class="search-btn">确认号码：</label>
+                    <input type="text" id="phone2" name="phone2"  required><br><br>
+
+                    <label for="password" class="search-btn">密码：</label>
+                    <input type="password" id="password" name="password" placeholder="请输入新密码" required><br><br>
+
+                    <input type="submit" value="提交">
+                </form>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<!-- self_info -->
+
+<footer class="mt20 center">
+    <div class="mt20">果 蔬 商 城|关 于 我 们|联 系 我 们|隐 私 政 策|选 择 地 区</div>
+    <div>©467473655@qq.com 京ICP证123456号 京ICP备654321号 京公网安备123456789号 京网文[2022]0010-0001号</div>
+    <div>违法和不良信息举报电话：185-0130-1238，本网站所列数据，除特殊说明，所有数据均出自我司实验室测试</div>
+</footer>
+</body>
+
+</html>
